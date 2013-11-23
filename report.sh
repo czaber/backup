@@ -7,6 +7,15 @@ LSOPT='-1st --si'
 
 echo "Stan dysku"
 echo "=========="
+df -H -x tmpfs -x devtmpfs
+echo "..."
+echo "S.M.A.R.T /dev/sda"
+smartctl -l selftest /dev/sda | grep '#'
+echo "S.M.A.R.T /dev/sdb"
+smartctl -l selftest /dev/sdb | grep '#'
+echo "S.M.A.R.T /dev/sdc"
+smartctl -l selftest /dev/sdc | grep '#'
+echo "...\n"
 
 echo "Dzienne kopie"
 echo "============="
