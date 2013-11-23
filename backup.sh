@@ -40,6 +40,7 @@ cd $FULLDIR
 #tar $R $TAROPT ${DATE}_redmine.tgz -C / home/redmine
 tar    $TAROPT ${DATE}_root.tgz  -C / root
 tar    $TAROPT ${DATE}_etc.tgz  -C / etc
+tar    $TAROPT ${DATE}_logs.tgz  -C / var/logs
 
 #mysqldump $DUMPOPT -u redmine  redmine_production  | gzip > ${DATE}_redmine.sql.gz
 #mysqldump $ROOTDUMPOPT -u root mysql | gzip > ${DATE}_backup.sql.gz
@@ -54,6 +55,6 @@ chmod 640 ${DATE}_*.*
 
 # 6. usuwamy stare pliki backupow, ktore maja wiecej dni niz podany argument
 for i in `find  $FULLDIR -name "*.*gz" -atime +$PERIOD_DAYS`; do
-  echo "Usuwam $i"
+  logger -t backup "Próba usunięcia przedawnionego pliku $i"
   rm $i
 done
